@@ -63,12 +63,12 @@ function removeQuantity(quantity, id, num, price) {
 function correctQuantity(id, product){
   inquirer.prompt([{
     name: "correctQuantity",
-    message: "How many " + product + " do you want?"
+    message: "How many do you want?"
   }, ]).then(function(answers) {
 
        connection.query("select * from products where item_id = " + id, function(err, results) {
         if (answers.correctQuantity > results[0].stock_quantity) {
-          console.log("I'm sorry there is insufficiant quantity to purchase " + answers.quantity + " of " + results[0].product_name + ".");
+          console.log("I'm sorry there is insufficiant quantity to purchase " + answers.correctQuantity + " of " + results[0].product_name + ".");
           correctQuantity(id);
         } else {
           var orderTotal = answers.correctQuantity * results[0].price;
